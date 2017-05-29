@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
     selector : 'app-home',
     template : `
         <div style='color:red; background-color:yellow'>
-             <p>Hello there me Lovelies</p>   
+             <p>Welcome to the home page</p>   
         </div>
     `
 })

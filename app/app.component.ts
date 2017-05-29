@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
 
+import { AppNavbar } from './common/app.navbar.component';
+
 @Component({
   selector: 'app-root',
   styleUrls: ['app.component.scss'],
   template: `
+  <base href='/'>
+  <h1> Todo App developed using Angular 4 </h1>
     <div class="app">
-      Hello World!
-      <app-home></app-home>
+      <nav-bar></nav-bar>
+      <router-outlet></router-outlet>
+      <!-- app-home></app-home -->
     </div>
   `
 })
