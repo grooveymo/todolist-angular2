@@ -1,19 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../models/Todo.interface';
 import { TodoList } from '../models/TodoList.interface';
-import { ListItemComponent } from "./view.listitem.component";
 
 @Component({
     selector: 'todo-lists',
     template: `
-                  <table style='table-layout:fixed'>
+                  <table style='table-layout:fixed; width:100%'>
                     <tr>
                         <th>title</th>
                         <th># items</th>
                         <th> action </th>
                     </tr>
                     <tr *ngFor="let item of todoLists">
-                        <todo-list-item [item]=item></todo-list-item>
+                        <td style='text-align:center'>
+                            {{item.title}}
+                        </td>
+                        <td style='text-align:center'>
+                            {{item.todos?.length}}
+                        </td>
+                        <td style='text-align:center'>
+                            <button>Edit</button>
+                        </td>        
                     </tr>
                   </table>  
                 `

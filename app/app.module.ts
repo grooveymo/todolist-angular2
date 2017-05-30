@@ -9,7 +9,6 @@ import {CreateListPageComponent } from './containers/create-list-page.component'
 import {EditListPageComponent } from './containers/edit-list-page.component'
 import {ViewListsPageComponent } from './containers/view-lists-page.component'
 import { ViewListsComponent } from "./viewLists/view.lists.component";
-import { ListItemComponent  } from "./viewLists/view.listitem.component";
 
 
 import {RouterModule, Routes} from '@angular/router'
@@ -38,7 +37,6 @@ const appRoutes : Routes = [
     EditListPageComponent,
     ViewListsPageComponent,
     ViewListsComponent,
-    ListItemComponent
   ]
 })
 export class AppModule {}
