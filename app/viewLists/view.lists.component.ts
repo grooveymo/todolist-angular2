@@ -45,7 +45,6 @@ import { TodoService } from '../services/todo.service';
                     }
 
                     tbody tr {
-                    background-image: url(noise.png);
                     }
 
                     table {
