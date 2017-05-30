@@ -11,6 +11,11 @@ import {ViewListsPageComponent } from './containers/view-lists-page.component'
 import { ViewListsComponent } from "./viewLists/view.lists.component";
 
 
+import { TodoService } from "./services/todo.service";
+import { HttpModule } from '@angular/http';
+import { CommonModule } from '@angular/common';
+
+
 import {RouterModule, Routes} from '@angular/router'
 
 //declare app routes (note should not have leading slash)
@@ -24,7 +29,9 @@ const appRoutes : Routes = [
 @NgModule({
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    CommonModule,
+    HttpModule
   ],
   bootstrap: [
     AppComponent
@@ -37,6 +44,7 @@ const appRoutes : Routes = [
     EditListPageComponent,
     ViewListsPageComponent,
     ViewListsComponent,
-  ]
+  ],
+  providers : [TodoService]  // declaring here makes it available anywhere in the application
 })
 export class AppModule {}
