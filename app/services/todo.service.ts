@@ -81,14 +81,40 @@ export class TodoService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server Error'))
   }
 
-  //need to add service to toggle completed status for specific todo in a given list
-  //'/todolists/:todoList_id/complete/:todoId'
+
+  /**
+   * toggle completed status for specific todo in a given list
+   * Service by /todolists/:todoList_id/complete/:todoId'
+   * @param listId 
+   * @param todoId 
+   */
   toggleTodoCompleteStatus(listId : number, todoId : number) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     let path = TODO_API + '/' + listId + '/complete/' + todoId;
 
     return this.http.put(path, options)
+      .map(
+      (response: Response) => {
+        console.log('foo: ' + JSON.stringify(response.json()));
+        return response.json();
+      })
+      .catch((error: any) => Observable.throw(error.json().error || 'Server Error'))
+    
+  }
+
+  /**
+   * Removes single Todo from list
+   * Serviced by '/todolists/:todoList_id/remove/:todoId'
+   * @param listId Id for Todo List
+   * @param todoId Id for Todo to be removed
+   */
+  removeTodo(listId : number, todoId : number) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    let path = TODO_API + '/' + listId + '/remove/' + todoId;
+
+    return this.http.delete(path, options)
       .map(
       (response: Response) => {
         console.log('foo: ' + JSON.stringify(response.json()));
