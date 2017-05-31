@@ -57,7 +57,8 @@ import { TodoService } from '../services/todo.service';
                     <tr>
                         <th> title </th>
                         <th># items </th>
-                        <th> action </th>
+                        <th> Edit </th>
+                        <th> Remove </th>
                     </tr>
                     <tr *ngFor="let item of todoLists">
                         <td style='text-align:center'>
@@ -69,6 +70,10 @@ import { TodoService } from '../services/todo.service';
                         <td style='text-align:center'>
                             <button (click)='editTodoList(item._id)'>Edit</button>
                         </td>        
+                        <td style='text-align:center'>
+                            <button (click)='removeTodoList(item._id)'>Remove</button>
+                        </td>        
+
                     </tr>
                   </table>  
                 `
@@ -118,5 +123,24 @@ export class ViewListsComponent implements OnInit {
      */
     editTodoList(todoListId: number) {
         this.router.navigate(['/edit-list/', todoListId]);
+    }
+
+
+    /**
+     * Removes todo list
+     * Note the remote endpoint behaves differently here since it does return an updated set of todo lists minus the one we just deleted
+     * Instead we need to check the status of the operation and then manually delete from our in-memory list.
+     * 
+     * @param todoListId Id for list
+     */
+    removeTodoList(todoListId: number) {
+        this.todoService.removeTodoList(todoListId)
+            .subscribe((data: number) => {
+                if(data === 200) {
+                      this.todoLists = this.todoLists.filter(function(item){
+                          return item._id != todoListId;
+                      });  
+                }
+            });
     }
 }

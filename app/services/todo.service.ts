@@ -88,7 +88,7 @@ export class TodoService {
    * @param listId 
    * @param todoId 
    */
-  toggleTodoCompleteStatus(listId : number, todoId : number) {
+  toggleTodoCompleteStatus(listId: number, todoId: number) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     let path = TODO_API + '/' + listId + '/complete/' + todoId;
@@ -100,7 +100,7 @@ export class TodoService {
         return response.json();
       })
       .catch((error: any) => Observable.throw(error.json().error || 'Server Error'))
-    
+
   }
 
   /**
@@ -109,7 +109,7 @@ export class TodoService {
    * @param listId Id for Todo List
    * @param todoId Id for Todo to be removed
    */
-  removeTodo(listId : number, todoId : number) {
+  removeTodo(listId: number, todoId: number) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     let path = TODO_API + '/' + listId + '/remove/' + todoId;
@@ -121,7 +121,24 @@ export class TodoService {
         return response.json();
       })
       .catch((error: any) => Observable.throw(error.json().error || 'Server Error'))
-    
+
+  }
+
+  /**
+   * Delete a Todo List
+   * @param listId Id of the List to be deleted
+   */
+  removeTodoList(listId: number) {
+    let path = TODO_API + '/' + listId;
+
+    return this.http.delete(path)
+      .map((response: Response) => {
+        console.log('DDT 1 ==> ' + JSON.stringify(response.status));
+        console.log('DDT  2==> ' + JSON.stringify(response.json()));
+        return response.status;
+      })
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
+
   }
 
 }
