@@ -38,6 +38,9 @@ import { TodoList } from '../models/TodoList.interface';
             </li>
             </ul>   
         </div>
+        <div>
+            Number of Active Todos: {{numActive}}
+        </div>
     `
 })
 export class EditListPageComponent implements OnInit {
@@ -47,6 +50,10 @@ export class EditListPageComponent implements OnInit {
     private currentTodoList: TodoList;
 
     private newTodo = '';
+
+    //Stores the count of todos yet to be completed
+    private numActive = 0;
+    
     /**
      * Want to retrieve the TodoList from db so that we can edit it.
      * The _id is passed in via the route /edit-lists/:_id
@@ -60,6 +67,7 @@ export class EditListPageComponent implements OnInit {
             (todoList: TodoList) => {
                 this.currentTodoList = todoList
                 console.log('retrieved : ' + this.currentTodoList.title);
+                this.numActive = this.todoService.calculateNumActive(this.currentTodoList.todos);
             }
             );
     }
@@ -75,26 +83,38 @@ export class EditListPageComponent implements OnInit {
                 console.log('bar list is now ' + JSON.stringify(data));
                 this.currentTodoList = data;
                 this.newTodo = '';
+                this.numActive = this.todoService.calculateNumActive(this.currentTodoList.todos);
+
             });
 
     }
 
+    /**
+     * Toggles the 'completed' status for a todo
+     */
     toggleIsCompleted(listId: number, todoId: number) {
 
         this.todoService.toggleTodoCompleteStatus(listId, todoId)
             .subscribe((data: TodoList) => {
                 console.log('bar list is now ' + JSON.stringify(data));
                 this.currentTodoList = data;
+                this.numActive = this.todoService.calculateNumActive(this.currentTodoList.todos);
             });
 
     }
 
+    /**
+     * Removes the todo from it's parent list
+     * @param listId Id for list
+     * @param todoId Id for todo
+     */
     removeTodo(listId: number, todoId: number) {
 
         this.todoService.removeTodo(listId, todoId)
             .subscribe((data: TodoList) => {
                 console.log('bar list is now ' + JSON.stringify(data));
                 this.currentTodoList = data;
+                this.numActive = this.todoService.calculateNumActive(this.currentTodoList.todos);
             });
 
     }

@@ -141,4 +141,21 @@ export class TodoService {
 
   }
 
+  /**
+   * Calculates number of todos that have yet to be completed
+   * @param todos Array of todos
+   */
+  calculateNumActive(todos: Todo[]) {
+
+    var completedTodos = [];
+    if (todos) {
+      completedTodos = todos.filter(function (todo) {
+          return todo.isCompleted;          
+      });
+
+      return (todos.length - completedTodos.length);
+    }
+    return -1;
+  }
+
 }
