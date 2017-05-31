@@ -8,6 +8,14 @@ import { TodoList } from '../models/TodoList.interface';
 @Component ({
     selector :  'edit-list-page',
     template : `
+        <style>
+            .todo {
+                padding : 10px;
+                display:inline;
+                width : 100px;
+                margin-left, margin-bottom:10px;
+            }
+        </style>
         <div>
             <p> Editing {{currentTodoList?.title}} </p>
         </div>
@@ -15,7 +23,21 @@ import { TodoList } from '../models/TodoList.interface';
             <input type='text' [(ngModel)]="newTodo"  (keyup.enter)='onAddTodo()' novalidate/>
         </div>
         <div>
-            <p *ngFor='let item of currentTodoList?.todos'>{{item.description}}</p>
+            <ul>
+            <li *ngFor='let item of currentTodoList?.todos'>
+
+                <div class='todo'>            
+                    <input type='checkbox' style='width:5%' [checked]="item.isCompleted" (change)='toggleIsCompleted(currentTodoList._id, item._id)' novalidate/>
+
+                    <label  style='width:70%' >
+                        {{item.description}}
+                   </label>
+
+                    <button>remove </button>
+                </div>
+                <!-- div class='todo'><button>remove </button></div -->
+            </li>
+             </ul>   
         </div>
     `
 })
@@ -45,6 +67,9 @@ export class EditListPageComponent implements OnInit {
     }
 
 
+    /**
+     * Adds new Todo to current List
+     */
     onAddTodo(){
         console.log('adding todo = ' + this.newTodo);
         this.todoService.addTodo(this.currentTodoList._id, this.newTodo)
@@ -52,6 +77,16 @@ export class EditListPageComponent implements OnInit {
             console.log('bar list is now ' + JSON.stringify(data));
             this.currentTodoList = data;
             this.newTodo = '';
+        });
+
+    }
+
+    toggleIsCompleted(listId : number , todoId : number) {
+
+        this.todoService.toggleTodoCompleteStatus(listId, todoId)
+        .subscribe((data : TodoList)=>{
+            console.log('bar list is now ' + JSON.stringify(data));
+            this.currentTodoList = data;
         });
 
     }
