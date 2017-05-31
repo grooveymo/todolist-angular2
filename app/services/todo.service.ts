@@ -15,6 +15,18 @@ export class TodoService {
   constructor(private http: Http) {}
 
  /**
+  * Retrieves single Todo lists
+  */
+  getTodoList(_id : string): Observable<TodoList> {
+      console.log('about to call GET/ ' + TODO_API + '/'+ _id);
+    return this.http
+      .get(TODO_API+'/'+_id)
+      .map((response: Response) => response.json())
+      .catch((error : any) =>  Observable.throw(error.json().error || 'Server error'));
+
+  }
+
+ /**
   * Retrieves all Todo lists
   */
   getTodoLists(): Observable<TodoList[]> {
@@ -22,7 +34,7 @@ export class TodoService {
     return this.http
       .get(TODO_API)
       .map((response: Response) => response.json())
-      .catch((error : any) =>  Observable.throw(error.json().error || 'Server error');
+      .catch((error : any) =>  Observable.throw(error.json().error || 'Server error'));
 
   }
 
@@ -49,7 +61,25 @@ export class TodoService {
 
  }
 
+/**
+ * adds new Todo to list
+ * @param _id ID for todo list we want append with new todo
+ * @param description description of todo
+ */
+addTodo(_id : number, description : string){
+  let headers = new Headers({'Content-Type' : 'application/json'});
+  let options = new RequestOptions({headers : headers});
+  let body = {'description' : description};
+  let path = TODO_API+'/'+_id+'/add';
 
+  return this.http.put(path, body, options)
+  .map(
+      (response : Response) => { 
+        console.log('foo: ' + JSON.stringify(response.json()) );
+        return response.json();
+   })
+  .catch((error:any) => Observable.throw(error.json().error || 'Server Error'))  
+}
 
 
 }

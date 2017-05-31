@@ -77,14 +77,14 @@ export class ViewListsComponent implements OnInit {
     todoLists: TodoList[];
 
     todo1: Todo = {
-        id: 111,
+        _id: 111,
         completed: new Date(),
         created: new Date(),
         isCompleted: false,
         description: "first todo"
     };
     todo2: Todo = {
-        id: 222,
+        _id: 222,
         completed: new Date(),
         created: new Date(),
         isCompleted: false,
@@ -94,7 +94,7 @@ export class ViewListsComponent implements OnInit {
     mylist = [this.todo1, this.todo2];
 
     todoList1: TodoList = {
-            id : 999,
+            _id : 999,
             dateCompleted: new Date(),
             created: new Date(),
             todos: this.mylist,
