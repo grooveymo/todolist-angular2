@@ -1,6 +1,6 @@
 import { Todo } from './Todo.interface'
 export interface TodoList {
-    id : number,
+    _id : number,
     dateCompleted : Date,
     created : Date,
     todos : Todo[],

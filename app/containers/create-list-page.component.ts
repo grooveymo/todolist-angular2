@@ -1,5 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { TodoService } from '../services/todo.service';
+import { TodoList } from '../models/TodoList.interface';
+
 //import { NgForm } from '@angular/forms';
 //                <input type='text' [(ngModel)]="title" (keyup.enter)='onCreate()' novalidate>
 /**
@@ -31,14 +35,21 @@ import { Router } from '@angular/router';
 export class CreateListPageComponent {
 
     @Input() 
-    title : string = 'Initial Value';
+    title : string = '';
 
     //inject in router 
-    constructor(private router : Router){}
+    constructor(private router : Router, private todoService : TodoService) { }
+
 
     onCreate(){
-        console.log('Create list ' + this.title);
-        this.router.navigate(['/home']);
+        console.log('Creating list ==>  ' + this.title);
+        this.todoService
+            .createTodoList({'title':this.title})
+            .subscribe((data : TodoList) => {
+                    console.log('routing to /edit-list/' + JSON.stringify(data._id));
+                     this.router.navigate(['/edit-list/', data._id]);
+            });
+
     }
 
     /** 

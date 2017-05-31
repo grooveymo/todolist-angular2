@@ -24,7 +24,7 @@ import {RouterModule, Routes} from '@angular/router'
 const appRoutes : Routes = [
   {path : 'home', component : HomeComponent},
   {path : 'create-list', component : CreateListPageComponent},
-  {path : 'edit-list', component : EditListPageComponent},
+  {path : 'edit-list/:id', component : EditListPageComponent},
   {path : 'view-lists', component : ViewListsPageComponent}
 ];
 
