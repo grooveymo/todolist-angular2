@@ -13,9 +13,9 @@ import { TodoList } from '../models/TodoList.interface';
  *                 <input type='text'  (keyup.enter)='onCreate()' novalidate>
  * which only provides 1 way binding. Whatever you set 'title' to in the model, this is reflected in the view.
  */
-@Component ({
-    selector : 'create-list-page',
-    template : `
+@Component({
+    selector: 'create-list-page',
+    template: `
         <div>
             <p> Welcome to the create list page </p>
             <label>
@@ -34,20 +34,20 @@ import { TodoList } from '../models/TodoList.interface';
 })
 export class CreateListPageComponent {
 
-    @Input() 
-    title : string = '';
+    @Input()
+    title: string = '';
 
     //inject in router 
-    constructor(private router : Router, private todoService : TodoService) { }
+    constructor(private router: Router, private todoService: TodoService) { }
 
 
-    onCreate(){
+    onCreate() {
         console.log('Creating list ==>  ' + this.title);
         this.todoService
-            .createTodoList({'title':this.title})
-            .subscribe((data : TodoList) => {
-                    console.log('routing to /edit-list/' + JSON.stringify(data._id));
-                     this.router.navigate(['/edit-list/', data._id]);
+            .createTodoList({ 'title': this.title })
+            .subscribe((data: TodoList) => {
+                console.log('routing to /edit-list/' + JSON.stringify(data._id));
+                this.router.navigate(['/edit-list/', data._id]);
             });
 
     }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Todo } from '../models/Todo.interface';
 import { TodoList } from '../models/TodoList.interface';
-
 import { TodoService } from '../services/todo.service';
 
 @Component({
@@ -66,7 +67,7 @@ import { TodoService } from '../services/todo.service';
                             {{item.todos?.length}}
                         </td>
                         <td style='text-align:center'>
-                            <button>Edit</button>
+                            <button (click)='editTodoList(item._id)'>Edit</button>
                         </td>        
                     </tr>
                   </table>  
@@ -94,21 +95,28 @@ export class ViewListsComponent implements OnInit {
     mylist = [this.todo1, this.todo2];
 
     todoList1: TodoList = {
-            _id : 999,
-            dateCompleted: new Date(),
-            created: new Date(),
-            todos: this.mylist,
-            title: "my todo list"
+        _id: 999,
+        dateCompleted: new Date(),
+        created: new Date(),
+        todos: this.mylist,
+        title: "my todo list"
 
     };
 
-    constructor(private todoService : TodoService) { }
+    constructor(private router: Router, private todoService: TodoService) { }
 
     ngOnInit() {
 
         //this.todoLists = [this.todoList1];
 
-        this.todoService.getTodoLists().subscribe( (data : TodoList[]) => {this.todoLists = data});
+        this.todoService.getTodoLists().subscribe((data: TodoList[]) => { this.todoLists = data });
     }
 
+    /**
+     * Navigates to edit list page
+     * @param todoListId Id of Todo List we wish to edit
+     */
+    editTodoList(todoListId: number) {
+        this.router.navigate(['/edit-list/', todoListId]);
+    }
 }
