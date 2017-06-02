@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 @Component({
     selector : 'nav-bar',
     template : `
-            <style>
+            <!-- style>
                 nav {
                     background-color: #333;
                     border: 1px solid #333;
@@ -35,18 +35,18 @@ import { Component } from '@angular/core';
                     padding: 0.5em 2em;
                     text-decoration: none;
                 }
-            </style>
+            </style -->
 
-            <nav>
-                <ul>
-                    <li>
-                        <a routerLink="/home" routerLinkActive="active">Home </a> |
+            <nav class="navbar navbar-inverse bg-primary navbar-toggleable-md">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" routerLink="/home" routerLinkActive="active">Home </a> 
                     </li>
-                    <li>
-                        <a routerLink="/create-list" routerLinkActive="active">Create List </a>  |
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/create-list" routerLinkActive="active">Create List </a>  
                     </li>
-                    <li>
-                        <a routerLink="/view-lists" routerLinkActive="active">View Lists </a>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/view-lists" routerLinkActive="active">View Lists </a>
                     </li>
                 </ul>
             </nav>
