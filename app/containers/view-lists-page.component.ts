@@ -5,7 +5,7 @@ import { ViewListsComponent } from "../viewLists/view.lists.component";
     selector : 'view-lists-page',
     template : `
         <div style='margin-top:20px'>
-            <h1 class='h1'> View Lists </h1>
+            <h1 class='h1 text-center'> View Lists </h1>
             <todo-lists></todo-lists>
         </div>
     `

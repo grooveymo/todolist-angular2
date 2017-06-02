@@ -16,19 +16,25 @@ import { TodoList } from '../models/TodoList.interface';
 @Component({
     selector: 'create-list-page',
     template: `
-        <div>
-            <p> Welcome to the create list page </p>
-            <label>
-                List Title : 
-                <input type='text' [(ngModel)]="title"  (keyup.enter)='onCreate()' novalidate>
-            </label>
-            <p>value : {{title}}</p>
+        <div style='margin-top:20px' class='card'>
+            <div class='card-header'>
+                <h1>Create List </h1>
+            </div>
+            <!-- h1 class='h1 text-center'> Create List </h1 -->
 
-            <button (click)='onCreate()'> Create </button>
+            <div class='card-block'>
+                <label>
+                    Title 
+                    <input type='text' [(ngModel)]="title"  (keyup.enter)='onCreate()' novalidate>
+                </label>
+                <!-- p>value : {{title}}</p -->
 
-            <!-- test 1 way data binding 
-            <button (click)='onBoogie()'> Boogie </button>
-               --> 
+                <button class='btn btn-success' (click)='onCreate()'> Create </button>
+
+                <!-- test 1 way data binding 
+                <button (click)='onBoogie()'> Boogie </button>
+                --> 
+           </div>     
         </div>
     `
 })
