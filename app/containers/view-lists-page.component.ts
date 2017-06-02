@@ -4,8 +4,8 @@ import { ViewListsComponent } from "../viewLists/view.lists.component";
 @Component ({
     selector : 'view-lists-page',
     template : `
-        <div>
-            <p> Welcome to the view lists page </p>
+        <div style='margin-top:20px'>
+            <h1 class='h1'> View Lists </h1>
             <todo-lists></todo-lists>
         </div>
     `

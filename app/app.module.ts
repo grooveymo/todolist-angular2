@@ -1,24 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
-
-import {HomeComponent} from './containers/home.component';
-import { AppNavbarComponent } from './common/app.navbar.component';
-import {CreateListPageComponent } from './containers/create-list-page.component'
-import {EditListPageComponent } from './containers/edit-list-page.component'
-import {ViewListsPageComponent } from './containers/view-lists-page.component'
-import { ViewListsComponent } from "./viewLists/view.lists.component";
-
-
-import { TodoService } from "./services/todo.service";
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
-
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router'
+
+import { AppComponent  } from './app.component';
+import { HomeComponent } from './containers/home.component';
+import { AppNavbarComponent } from './common/app.navbar.component';
+import { CreateListPageComponent } from './containers/create-list-page.component'
+import { EditListPageComponent } from './containers/edit-list-page.component'
+import { ViewListsPageComponent } from './containers/view-lists-page.component'
+import { ViewListsComponent } from "./viewLists/view.lists.component";
+import { TodoService } from "./services/todo.service";
 
 
-import {RouterModule, Routes} from '@angular/router'
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 //declare app routes (note should not have leading slash)
 const appRoutes : Routes = [
@@ -34,7 +31,8 @@ const appRoutes : Routes = [
     RouterModule.forRoot(appRoutes),
     CommonModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    NgbModule.forRoot()
   ],
   bootstrap: [
     AppComponent

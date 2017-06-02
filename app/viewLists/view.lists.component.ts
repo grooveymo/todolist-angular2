@@ -9,72 +9,30 @@ import { TodoService } from '../services/todo.service';
     selector: 'todo-lists',
 
     template: `
-                <style>
-                table {
-                    table-layout: fixed;
-                    width: 100%;
-                    border-collapse: collapse;
-                    border: 3px solid purple;
-                    }
-
-                    thead th:nth-child(1) {
-                    width: 30%;
-                    }
-
-                    thead th:nth-child(2) {
-                    width: 20%;
-                    }
-
-                    thead th:nth-child(3) {
-                    width: 15%;
-                    }
-
-                    thead th:nth-child(4) {
-                    width: 35%;
-                    }
-
-                    th, td {
-                    padding: 20px;
-                }
-                
-                tbody tr:nth-child(odd) {
-                    background-color: #ff33cc;
-                    }
-
-                    tbody tr:nth-child(even) {
-                    background-color: #e495e4;
-                    }
-
-                    tbody tr {
-                    }
-
-                    table {
-                    background-color: #ff33cc;
-                    }
-                </style>
-
-                  <table style='table-layout:fixed; width:100%'>
-                    <tr>
-                        <th> title </th>
-                        <th># items </th>
+                  <table class='table table-striped'>
+                    <thead class='thead-inverse'>
+                        <th> Title </th>
+                        <th># Items </th>
                         <th> Edit </th>
                         <th> Remove </th>
-                    </tr>
+                    </thead>
+                    <tbody>
                     <tr *ngFor="let item of todoLists">
-                        <td style='text-align:center'>
+                        <td>
                             {{item.title}}
                         </td>
-                        <td style='text-align:center'>
+                        <td>
                             {{item.todos?.length}}
                         </td>
-                        <td style='text-align:center'>
-                            <button (click)='editTodoList(item._id)'>Edit</button>
+                        <td >
+                            <button (click)='editTodoList(item._id)' class='btn btn-warning'>Edit</button>
                         </td>        
-                        <td style='text-align:center'>
-                            <button (click)='removeTodoList(item._id)'>Remove</button>
+                        <td >
+                            <button (click)='removeTodoList(item._id)' class='btn btn-danger'>Remove</button>
                         </td>        
 
                     </tr>
+                    </tbody>
                   </table>  
                 `
 })
