@@ -9,44 +9,46 @@ import { Todo } from '../models/Todo.interface';
 @Component({
     selector: 'edit-list-page',
     template: `
-        <style>
-            .todo {
-                padding : 10px;
-                display:inline;
-                width : 100px;
-                margin-left, margin-bottom:10px;
-            }
-        </style>
-        <div>
-            <p> Editing {{currentTodoList?.title}} </p>
+        <div style='margin-top:20px'>
+            <h1 class='alert alert-warning'> Editing List <span class='badge badge-default'> {{currentTodoList?.title}} </span> </h1>
         </div>
-        <div>
-            <input type='text' [(ngModel)]="newTodo"  (keyup.enter)='onAddTodo()' novalidate/>
+        <div class='card'>
+            <div class='card-header'>
+                <label>Todo</label>
+                <input type='text' [(ngModel)]="newTodo"  (keyup.enter)='onAddTodo()' novalidate/>
+                <button class='btn btn-success' (click)='onAddTodo()'>Add</button>
+            </div>
+            <div class='card-block'>
+                <ul class='list-group'>
+                    <li *ngFor='let item of displayableTodoList' class='list-group-item'>
+
+                        <input class='col-2' type='checkbox' [checked]="item.isCompleted" (change)='toggleIsCompleted(currentTodoList._id, item._id)' novalidate/>
+
+                        <label class='col-4' >
+                            {{item.description}}
+                         </label>
+
+                        <div class='col-2'>
+                            <button  class='btn btn-danger' (click)='removeTodo(currentTodoList._id, item._id)'>remove </button>
+                        </div>
+                    </li>
+                </ul>   
+            </div>
         </div>
-        <div>
-            <ul>
-            <!-- li *ngFor='let item of currentTodoList?.todos' -->
-            <li *ngFor='let item of displayableTodoList'>
 
-                <div class='todo'>            
-                    <input type='checkbox' style='width:5%' [checked]="item.isCompleted" (change)='toggleIsCompleted(currentTodoList._id, item._id)' novalidate/>
-
-                    <label  style='width:70%' >
-                        {{item.description}}
-                   </label>
-
-                    <button (click)='removeTodo(currentTodoList._id, item._id)'>remove </button>
-                </div>
-            </li>
-            </ul>   
-        </div>
-        <div>
+        <div class='alert alert-info'>
             Number of Active Todos: {{numActive}}
         </div>
-        <div>
-            <button (click)='showAll()'> All </button>
-            <button (click)='showActive()'> Active </button>
-            <button (click)='showCompleted()'> Completed </button>
+        <div class='row'>
+            <div class='col-1'>
+            <button  class='btn btn-warning' (click)='showAll()'> All </button>
+            </div>
+            <div class='col-1'>
+            <button  class='btn btn-primary' (click)='showActive()'> Active </button>
+            </div>
+            <div class='col-1'>
+            <button  class='btn btn-success' (click)='showCompleted()'> Completed </button>
+            </div>
         </div>
 
     `
